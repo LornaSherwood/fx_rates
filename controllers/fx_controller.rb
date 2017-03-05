@@ -11,7 +11,6 @@ end
 # get selections
 post '/' do
   @fx = Fx.new(params)
-  #@results = @fx.return_rates_data()
-  @results = @fx.calculate_fx_multiplier() * params[:amount].to_f
+  @results = (@fx.calculate_fx_multiplier() * params[:amount].to_f).round(2)
   erb(:index)
 end

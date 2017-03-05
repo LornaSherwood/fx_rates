@@ -11,7 +11,7 @@ class Fx
     @data = PStore.new("fx.pstore")
   end
 
-  def add_rates_data
+  def update_rates_data
     @data.transaction do
      @data["GBP"] = 0.86355
      @data["USD"] = 1.0565
@@ -30,9 +30,9 @@ class Fx
   def calculate_fx_multiplier()
     #ExchangeRate.at(Date.today,'GBP','USD')
     @data.transaction do
-      euro = 1 / @data["#{@currency_have}"]
+      euro = 1.0 / @data["#{@currency_have}"]
       counter_currency = euro * @data["#{@currency_want}"]
-      return counter_currency.round(2)
+      return counter_currency
     end
   end
 
