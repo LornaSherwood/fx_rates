@@ -18,6 +18,13 @@
 
   <p>
     <label>
+      How much:
+      <input type="text" name="amount">
+    </label>
+  </p>
+
+  <p>
+    <label>
       Select which currency you would like:
       <select name="currency_want">
         <option value="USD">USD</option>
@@ -30,7 +37,7 @@
 
   <% if @results != nil %>
     <div id="results">
-      <p><%= @results %></p>
+      <p>You will get <%= @results %></p>
     </div>
   <% end %>
 
