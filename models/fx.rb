@@ -7,17 +7,13 @@ class Fx
   def initialize(options)
     @currency_have = options['currency_have']
     @currency_want = options['currency_want']
+    @data = {"GBP" => 0.86355, "USD" => 1.0565}
   end
 
-  def display_params()
-    return "#{@currency_have} + #{@currency_want}"
+  def calculate_fx_multiplier()
+    euro = 1 / @data["#{@currency_have}"]
+    multiplier = euro * @data["#{@currency_want}"]
+    return multiplier.round(2)
   end
-
-
-  # def calculate_fx_multiplier(currency_have, currency_want)
-  #   euro = currency_have / @data[:GBP]
-  #   multiplier = euro * @data[:USD]
-  #   return multiplier
-  # end
 
 end

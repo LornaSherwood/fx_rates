@@ -11,6 +11,6 @@ end
 # get selections
 post '/' do
   @fx = Fx.new(params)
-  @results = @fx.display_params()
+  @results = @fx.calculate_fx_multiplier()
   erb(:index)
 end
