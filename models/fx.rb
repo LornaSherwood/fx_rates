@@ -1,22 +1,42 @@
 #require library at some point
+require 'pstore'
 
 class Fx
 
-  attr_reader( :currency_have, :amount, :currency_want )
+  attr_reader( :currency_have, :currency_want )
 
   def initialize(options)
     @currency_have = options['currency_have']
     @currency_want = options['currency_want']
-    @amount = options['amount']
-    @data = {"GBP" => 0.86355, "USD" => 1.0565}
+    @data = PStore.new("fx.pstore")
+  end
+
+  def add_rates_data
+    @data.transaction do
+     @data["GBP"] = 0.86355
+     @data["USD"] = 1.0565
+     @data["JPY"] = 120.83
+
+     @data.commit
+    end
+  end
+
+  def return_rates_data
+    @data.transaction do
+      return @data["GBP"]
+    end
   end
 
   def calculate_fx_multiplier()
     #ExchangeRate.at(Date.today,'GBP','USD')
-    euro = @amount.to_f / @data["#{@currency_have}"]
-    counter_currency = euro * @data["#{@currency_want}"]
-
-    return counter_currency.round(2)
+    @data.transaction do
+      euro = 1 / @data["#{@currency_have}"]
+      counter_currency = euro * @data["#{@currency_want}"]
+      return counter_currency.round(2)
+    end
   end
 
+  
+
 end
+
