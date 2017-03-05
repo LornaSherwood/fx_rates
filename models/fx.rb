@@ -1,26 +1,23 @@
+#require library at some point
+
 class Fx
 
-  attr_reader 
-  attr_accessor 
+  attr_reader( :currency_have, :currency_want )
 
-  def initialize( options )
-    @date = options['date']
-    @currency_from = options['currency_from']
-    @currency_to = options['currency_to']
+  def initialize(options)
+    @currency_have = options['currency_have']
+    @currency_want = options['currency_want']
   end
 
-  # get from local storage
-
-  data = { 
-    GBP: 0.86355,
-    USD: 1.0565
-  }
-
-
-  def calculate_fx_multiplier(data, currency_from, currency_to)
-    euro = 1 / data[:GBP]
-    multiplier = euro * data[:USD]
-    return multiplier
+  def display_params()
+    return "#{@currency_have} + #{@currency_want}"
   end
+
+
+  # def calculate_fx_multiplier(currency_have, currency_want)
+  #   euro = currency_have / @data[:GBP]
+  #   multiplier = euro * @data[:USD]
+  #   return multiplier
+  # end
 
 end

@@ -4,25 +4,35 @@
 
 </div>
 
-<form class="form" action="/fx/result" method="post">
+<form class="form" action="/" method="post">
 
-  <p><label>
-    Select which currency you have:
-    <select name="currency">
-      <option value="USD">USD</option>
-      <option value="GBP">GBP</option>
-    </select>
-  </label></p>
+  <p>
+    <label>
+      Select which currency you have:
+      <select name="currency_have">
+        <option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+      </select>
+    </label>
+  </p>
 
-  <p><label>
-    Select which currency you would like:
-    <select name="currency">
-      <option value="USD">USD</option>
-      <option value="GBP">GBP</option>
-    </select>
-  </label></p>
+  <p>
+    <label>
+      Select which currency you would like:
+      <select name="currency_want">
+        <option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+      </select>
+    </label>
+  </p>
 
   <input class="link" type="submit" value="Submit">
+
+  <% if @results != nil %>
+    <div id="results">
+      <p><%= @results %></p>
+    </div>
+  <% end %>
 
 </form>
 
