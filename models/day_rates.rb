@@ -26,3 +26,7 @@ class DayRates
   end
 
 end
+
+# rates = DayRates.new(2017-03-12, 1.2345, 1.2345, 1.2345, 1.2345, 1.2345, 1.2345, 1.2345, 1.2345)
+
+# puts rates.usd

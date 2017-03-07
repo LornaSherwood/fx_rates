@@ -25,12 +25,15 @@ class DataUpdater
       rate = item["rate"]
       rates[currency] = rate
     end
+
     return rates
+    
   end
 
   def create_rates_object(rates_hash)
+    
     date = Date.today
-    rates = DayRates.new(date, rates_hash[:USD], rates_hash[:JPY], rates_hash[:BGN], rates_hash[:CZK], rates_hash[:DKK], rates_hash[:GBP], rates_hash[:HUF], rates_hash[:PLN])
+    rates = DayRates.new(date, rates_hash["USD"], rates_hash["JPY"], rates_hash["BGN"], rates_hash["CZK"], rates_hash["DKK"], rates_hash["GBP"], rates_hash["HUF"], rates_hash["PLN"])
     return rates
   end
 
@@ -41,7 +44,9 @@ test_run = DataUpdater.new
 data = test_run.get_data()
 rates_hash = test_run.transform_data(data)
 
+
 day_rates = test_run.create_rates_object(rates_hash)
+
 day_rates.save()
 
 
