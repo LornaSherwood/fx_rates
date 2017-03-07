@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS fx_rates;
+
+
+
+CREATE TABLE fx_rates(
+  date DATE primary key,
+  USD FLOAT,
+  JPY FLOAT,
+  BGN FLOAT,
+  CZK FLOAT,
+  DKK FLOAT,
+  GBP FLOAT,
+  HUF FLOAT,
+  PLN FLOAT
+);

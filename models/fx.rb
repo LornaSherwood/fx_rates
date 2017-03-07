@@ -1,42 +1,31 @@
-#require library at some point
-require 'pstore'
+require_relative("../db/sql_runner")
 
 class Fx
 
-  attr_reader( :currency_have, :currency_want )
+  attr_reader( :date, :currency_have, :currency_want )
 
   def initialize(options)
+    @date = options['date']
     @currency_have = options['currency_have']
     @currency_want = options['currency_want']
-    @data = PStore.new("fx.pstore")
   end
 
-  def update_rates_data
-    @data.transaction do
-     @data["GBP"] = 0.86355
-     @data["USD"] = 1.0565
-     @data["JPY"] = 120.83
-
-     @data.commit
-    end
+  def self.return_rates(date)
+    sql = "SELECT * FROM fx_rates WHERE date = '#{ date }';"
+    data_from_db = SqlRunner.run(sql)
+    return data_from_db.map { |hash| Fx.new(hash)}
   end
 
-  def return_rates_data
-    @data.transaction do
-      return @data["GBP"]
-    end
-  end
-
-  def calculate_fx_multiplier()
+  def calculate_fx_multiplier(date, currency_have, currency_want)
     #ExchangeRate.at(Date.today,'GBP','USD')
-    @data.transaction do
-      euro = 1.0 / @data["#{@currency_have}"]
-      counter_currency = euro * @data["#{@currency_want}"]
-      return counter_currency
-    end
+    results = self.return_rates(date)
+    
+    euro_rate = 1.0 / results['#{currency_have}']
+    counter_currency = euro_rate * results['#{currency_want}']
+    return counter_currency
   end
-
-  
 
 end
+
+
 
