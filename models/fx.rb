@@ -10,10 +10,12 @@ class Fx
     @currency_want = options['currency_want']
   end
 
-  def self.return_rates(date)
+  def return_rates(date)
     sql = "SELECT * FROM fx_rates WHERE date = '#{ date }';"
-    data_from_db = SqlRunner.run(sql)
-    return data_from_db.map { |hash| Fx.new(hash)}
+    #sql2 = "SELECT '#{currency_want}' FROM fx_rates WHERE date = '#{ date }';"
+    have = SqlRunner.run(sql).first
+    #want = SqlRunner.run(sql2)
+    return have
   end
 
   def calculate_fx_multiplier(date, currency_have, currency_want)

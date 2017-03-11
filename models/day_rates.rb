@@ -1,5 +1,6 @@
 require_relative("../db/sql_runner")
 
+
 class DayRates
 
   attr_reader :date, :usd, :jpy, :bgn, :czk, :dkk, :gbp, :huf, :pln
@@ -25,8 +26,6 @@ class DayRates
     SqlRunner.run( sql )
   end
 
+
+
 end
-
-# rates = DayRates.new(2017-03-12, 1.2345, 1.2345, 1.2345, 1.2345, 1.2345, 1.2345, 1.2345, 1.2345)
-
-# puts rates.usd

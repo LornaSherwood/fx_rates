@@ -39,33 +39,17 @@ class DataUpdater
 
 end
 
-test_run = DataUpdater.new
+############# How to save to database ####################################
 
-data = test_run.get_data()
-rates_hash = test_run.transform_data(data)
+test_run = DataUpdater.new # create object for 'today'
+data = test_run.get_data()  # parse results from url
 
-
-day_rates = test_run.create_rates_object(rates_hash)
-
-day_rates.save()
+rates_hash = test_run.transform_data(data) # change data to format for db
 
 
+day_rates = test_run.create_rates_object(rates_hash) # create object of data
+
+day_rates.save() # save data to database
 
 
-
-# for each entry in parsed["gesmes:Envelope"]["Cube"]["Cube"][0]["Cube"]
-#   entry['currency'] <= entry rate
-#   insert entry['rate']
-
-# or
-
-# inject straight into SQL?
-
-
-
-#for each entry in last array 
-#currency == key, rates == value
-
-
-# @data['#{["Cube"]["Cube"]["Cube"][0]["currency"]'}] = '#{["Cube"]["Cube"]["Cube"][0]["rate"]}'
 

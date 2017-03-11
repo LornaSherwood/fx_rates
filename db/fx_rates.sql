@@ -1,7 +1,5 @@
 DROP TABLE IF EXISTS fx_rates;
 
-
-
 CREATE TABLE fx_rates(
   date DATE primary key,
   USD FLOAT,

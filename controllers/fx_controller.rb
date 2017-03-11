@@ -10,8 +10,10 @@ end
 
 # get selections
 post '/' do
-
-  @results = Fx.return_rates(params[:date])
-  @results = (@fx.calculate_fx_multiplier(params[:date], params[:currency_have], params[:currency_want]) * params[:amount].to_f).round(2)
+  date = params[:date]
+  @rates = Fx.new(params)
+  @results = @rates.return_rates(date) # create object of data
+  
+  # @results = (@fx.calculate_fx_multiplier(params[:date], params[:currency_have], params[:currency_want]) * params[:amount].to_f).round(2)
   erb(:index)
 end
